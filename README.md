@@ -34,4 +34,3 @@ https://github.com/matonis/yara_tools
                         androguard.package_name("com1") and
                         androguard.package_name("com2") and
                         androguard.app_name("앱 이름")
-}
