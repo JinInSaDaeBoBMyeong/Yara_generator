@@ -6,7 +6,6 @@
 https://github.com/matonis/yara_tools
 
 ## 생성 예시
-{
 	import "androguard"
 
 	rule 123456789
@@ -37,4 +36,3 @@ https://github.com/matonis/yara_tools
 			androguard.app_name("앱 이름")
 
 	}
-}
