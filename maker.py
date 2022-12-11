@@ -1,61 +1,74 @@
+from androguard.core.bytecodes.apk import APK
+import json
 import os
-import yara
-import yara_tools
+import hashlib
+import yara_generator
 
-def yara_maker():
-    #hash
-    sample_name = '123456789'
-    app_name = '앱 이름'
-    apk_package = ['com1', 'com2']
-    # Permisison example(top 15)
-    andro_permission = ['android.permission.GET_INTENT_SENDER_INTENT', 'android.permission.PACKAGE_USAGE_STATS', 'android.permission.WRITE_MEDIA_STORAGE',
-                        'android.permission.REQUEST_INSTALL_PACKAGES', 'android.permission.WRITE_EXTERNAL_STORAGE', 'android.permission.INTERACT_ACROSS_USERS_FULL',
-                        'android.permission.CAPTURE_SECURE_VIDEO_OUTPUT', 'android.permission.SET_PROCESS_LIMIT', 'android.permission.CAPTURE_VIDEO_OUTPUT', 'android.permission.ACCESS_BACKGROUND_LOCATION',
-                        'android.permission.RECORD_VIDEO', 'android.permission.READ_CALL_LOG', 'android.permission.CAPTURE_AUDIO_HOTWORD', 'android.permission.READ_EXTERNAL_STORAGE']
+sample_path = r'sample'
+json_path = r'json'
+fileEx = r'.apk'
+apk_path = []
 
-    #import module
-    rule= yara_tools.create_rule(name=sample_name)
-    rule.add_import(name='androguard')
-    rule.set_default_boolean(value='and')
+def file_size(apk_file):
+    i = os.path.getsize(apk_file)
+    filesize = int(round(i/1024,2))
+    return filesize
+#file hash(json 제목 MD5로 하기 위해)
+def file_hash(apk_file):
+    f = open(apk_file, 'r')
+    data = f.read()
+    hash = hashlib.md5(data).hexdigest()
+    return hash
 
-    #rule meta data
-    rule.add_meta(key='author', value='@Jininsadaebobmyeong')
-    rule.add_meta(key = 'application name', value=app_name)
+def file_load():
+    if not os.path.isdir(sample_path):
+        os.mkdir(sample_path)
+    elif not os.path.isdir(json_path):
+        os.mkdir(json_path)
+    else:
+        try:
+            apk_list = [file for file in os.listdir(sample_path) if file.endswith(fileEx)]
+            #file path 
+            return apk_list
 
-    rule.add_condition(condition="filesize < 100000")
+        except Exception as e:
+            print("[+] File Load Fail : {}".format(e))
+#APK Analyze           
+def apk_analyze(apk_list):
+    for al in range(len(apk_list)):
+        #file path
+        apk_path.append(sample_path + str('/') + apk_list[al])
+        #file_hash
+        # file_hash(apk_path[al])
 
-    #Permission Rule
-    for i in range(len(andro_permission)):
-        permission_rule = 'androguard.permission("{}")'.format(andro_permission[i])
-        rule.add_condition(condition = permission_rule)
-    #package
-    for ap in range(len(apk_package)):
-        apk_package_rule = 'androguard.package_name("{}")'.format(apk_package[ap])
-        rule.add_condition(condition=apk_package_rule)
-    #app name
-    app_name_rule = 'androguard.app_name("{}")'.format(app_name)
-    rule.add_condition(condition=app_name_rule)
+        a = APK(apk_path[al])
+        print("[+] 파일 분석 완료")
+        json_yara_make(a, apk_list[al])
+        print("[+]" + apk_list[al] + "파일 json 변환 완료 ")
+#Json make
+def json_yara_make(apk_file, apk_list):
+    apk_size= file_size(sample_path + str("/") +apk_list)
+    # Yara 룰 제작
+    yara_generator.start(apk_file, apk_size, apk_list[:-4])
+    d = {}
+    d["app_name"] = apk_file.get_app_name()
+    d["package_name"] = apk_file.get_package()
+    d['permissions'] = apk_file.get_permissions()
+    d['activities'] = apk_file.get_activities()
+    d['receivers'] = apk_file.get_receivers()
+    d['providers'] = apk_file.get_providers()
+    d['main_activity'] = apk_file.get_main_activity()
+    d['services'] = apk_file.get_services()
+    d['max_sdk_version'] = apk_file.get_max_sdk_version()
+    d['min_sdk_version'] = apk_file.get_min_sdk_version()
+    d['version_code'] = apk_file.get_androidversion_code()
+    d['libraries'] = [x for x in apk_file.get_libraries()]
+    d['target_sdk_version'] = apk_file.get_target_sdk_version()
+    d['filesize'] = str(apk_size) + "KB"
+    json_name = json_path +str("/") + str(apk_list[:-4]) + str(".json")
+    with open(json_name, "w") as json_file:
+        json.dump(d, json_file, indent=4, sort_keys=True)
 
-    generated_rule = rule.build_rule()
-
-    try:
-        print(generated_rule)
-        print("[+] SUCCESS: IT WORKED!")
-        return sample_name, generated_rule
-    except Exception as e:
-        print("[+] Failed :", e)
-
-#file make
-def file_maker(file_name, rule_data):
-    file_path = 'rule/{}.yar'.format(file_name)
-    with open(file_path, 'w') as f:
-        f.write(rule_data)
-    print("[+] File Make Success!")
-if __name__=="__main__":
-    if not os.path.isdir('rule'):
-        os.mkdir('rule')
-    try:
-        rule_data = yara_maker()
-        file_maker(rule_data[0], rule_data[1])
-    except Exception as e:
-        print("[+] Failed :", e)
+if __name__ == "__main__":
+    fl = file_load()
+    apk_analyze(fl)
