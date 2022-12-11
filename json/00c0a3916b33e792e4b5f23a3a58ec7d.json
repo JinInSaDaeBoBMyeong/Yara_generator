@@ -1,0 +1,40 @@
+{
+    "activities": [
+        "nsuj.wbbgue.bmzbhnz.Flnujgyaj",
+        "nsuj.wbbgue.bmzbhnz.SampleOverlayHideActivity"
+    ],
+    "app_name": "XXX video",
+    "filesize": "1050KB",
+    "libraries": [],
+    "main_activity": "nsuj.wbbgue.bmzbhnz.Flnujgyaj",
+    "max_sdk_version": null,
+    "min_sdk_version": "9",
+    "package_name": "nsuj.wbbgue.bmzbhnz",
+    "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.GET_TASKS",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.WAKE_LOCK",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.WRITE_SETTINGS",
+        "android.permission.READ_CONTACTS",
+        "android.permission.VIBRATE",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.GET_ACCOUNTS",
+        "android.permission.INTERNET",
+        "android.permission.READ_PHONE_STATE"
+    ],
+    "providers": [],
+    "receivers": [
+        "nsuj.wbbgue.bmzbhnz.Bneov",
+        "nsuj.wbbgue.bmzbhnz.Qnukexey",
+        "nsuj.wbbgue.bmzbhnz.Gqvepzigg"
+    ],
+    "services": [
+        "nsuj.wbbgue.bmzbhnz.Sinngtcfu"
+    ],
+    "target_sdk_version": null,
+    "version_code": "1"
+}

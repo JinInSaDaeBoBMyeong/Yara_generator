@@ -1,0 +1,41 @@
+{
+    "activities": [
+        "com.azianames.foroneyhar.yufakov",
+        "com.azianames.foroneyhar.js3knzbdy.hguuul"
+    ],
+    "app_name": "Cheat",
+    "filesize": "116KB",
+    "libraries": [],
+    "main_activity": "com.azianames.foroneyhar.yufakov",
+    "max_sdk_version": null,
+    "min_sdk_version": "8",
+    "package_name": "com.yandex226.yandex967",
+    "permissions": [
+        "android.permission.INSTALL_PACKAGES",
+        "android.permission.GET_TASKS",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.RECEIVE_SMS",
+        "android.permission.CALL_PRIVILEGED",
+        "android.permission.READ_CONTACTS",
+        "android.permission.READ_SMS",
+        "android.permission.SEND_SMS",
+        "android.permission.CALL_PHONE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.DELETE_PACKAGES",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.INTERNET",
+        "android.permission.READ_PHONE_STATE"
+    ],
+    "providers": [],
+    "receivers": [
+        "com.azianames.foroneyhar.js3knzbdy.jiwj7en",
+        "com.azianames.foroneyhar.dkrspzo6ah"
+    ],
+    "services": [
+        "com.azianames.foroneyhar.js3knzbdy.gmyiuqcz",
+        "com.azianames.foroneyhar.filnnomn"
+    ],
+    "target_sdk_version": "22",
+    "version_code": "1"
+}

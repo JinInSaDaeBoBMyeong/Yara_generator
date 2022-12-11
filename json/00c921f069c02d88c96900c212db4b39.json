@@ -1,0 +1,50 @@
+{
+    "activities": [
+        "com.spwebgames.blocks.MainActivity",
+        "com.mobfox.sdk.InAppWebView",
+        "com.android.view.custom.BaseAActivity",
+        "com.android.view.custom.FirstAActivity",
+        "com.android.view.custom.SecondAActivity",
+        "com.android.view.custom.ThirdAActivity",
+        "com.android.view.custom.FourthAActivity"
+    ],
+    "app_name": "Block Rampage",
+    "filesize": "584KB",
+    "libraries": [],
+    "main_activity": "com.spwebgames.blocks.MainActivity",
+    "max_sdk_version": null,
+    "min_sdk_version": "3",
+    "package_name": "com.spwebgames.blocks",
+    "permissions": [
+        "android.permission.WRITE_APN_SETTINGS",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.READ_LOGS",
+        "android.permission.WAKE_LOCK",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.RECEIVE_SMS",
+        "android.permission.READ_SMS",
+        "android.permission.READ_CONTACTS",
+        "android.permission.WRITE_CONTACTS",
+        "android.permission.RESTART_PACKAGES",
+        "android.permission.VIBRATE",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.SEND_SMS",
+        "android.permission.DISABLE_KEYGUARD",
+        "android.permission.CALL_PHONE",
+        "android.permission.WRITE_SMS",
+        "android.permission.INTERNET",
+        "android.permission.READ_PHONE_STATE"
+    ],
+    "providers": [],
+    "receivers": [
+        "com.android.view.custom.BaseABroadcastReceiver"
+    ],
+    "services": [
+        "com.android.view.custom.FirstAService",
+        "com.android.view.custom.SecondAService",
+        "com.android.view.custom.ThirdAService",
+        "com.android.view.custom.FourthAService"
+    ],
+    "target_sdk_version": "4",
+    "version_code": "9"
+}
