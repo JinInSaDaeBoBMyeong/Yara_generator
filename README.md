@@ -6,33 +6,58 @@
 https://github.com/matonis/yara_tools
 
 ## 생성 예시
-	import "androguard"
-
-	rule 123456789
+	rule Tai
 	{
 		meta:
 			author="@Jininsadaebobmyeong"
-			application name="앱 이름"
+			filetype="app"
+			application_name="Tai"
 
-
+		strings:
+			$permission0 = "android.permission.GET_TASKS"
+			$permission1 = "com.android.launcher3.permission.WRITE_SETTINGS"
+			$permission2 = "android.permission.WAKE_LOCK"
+			$permission3 = "android.permission.WRITE_SETTINGS"
+			$permission4 = "com.android.launcher.permission.INSTALL_SHORTCUT"
+			$permission5 = "android.permission.WRITE_SECURE_SETTINGS"
+			$permission6 = "android.permission.VIBRATE"
+			$permission7 = "android.permission.READ_EXTERNAL_STORAGE"
+			$permission8 = "com.android.launcher.permission.UNINSTALL_SHORTCUT"
+			$permission9 = "android.permission.SYSTEM_OVERLAY_WINDOW"
+			$permission10 = "com.huawei.android.launcher.permission.READ_SETTINGS"
+			$permission11 = "android.permission.REAL_GET_TASKS"
+			$permission12 = "android.permission.BROADCAST_STICKY"
+			$permission13 = "android.permission.RECEIVE_BOOT_COMPLETED"
+			$permission14 = "android.permission.ACCESS_COARSE_LOCATION"
+			$permission15 = "com.android.launcher2.permission.WRITE_SETTINGS"
+			$permission16 = "android.permission.ACCESS_FINE_LOCATION"
+			$permission17 = "android.permission.ACCESS_WIFI_STATE"
+			$permission18 = "android.permission.SYSTEM_ALERT_WINDOW"
+			$permission19 = "android.permission.PACKAGE_USAGE_STATS"
+			$permission20 = "android.permission.CHANGE_NETWORK_STATE"
+			$permission21 = "com.google.android.launcher.permission.READ_SETTINGS"
+			$permission22 = "com.android.launcher.permission.WRITE_SETTINGS"
+			$permission23 = "com.sonymobile.home.permission.PROVIDER_ACCESS_MODIFY_CONFIGURATION"
+			$permission24 = "android.permissoon.READ_PHONE_STATE"
+			$permission25 = "com.qihoo360.home.permission.READ_SETTINGS"
+			$permission26 = "com.huawei.android.launcher.permission.WRITE_SETTINGS"
+			$permission27 = "com.android.launcher3.permission.READ_SETTINGS"
+			$permission28 = "android.permission.KILL_BACKGROUND_PROCESSES"
+			$permission29 = "android.permission.INTERNET"
+			$permission30 = "android.permission.READ_PHONE_STATE"
+			$permission31 = "android.permission.ACCESS_NETWORK_STATE"
+			$permission32 = "android.permission.READ_LOGS"
+			$permission33 = "android.permission.READ_SETTINGS"
+			$permission34 = "com.google.android.launcher.permission.WRITE_SETTINGS"
+			$permission35 = "android.permission.DISABLE_KEYGUARD"
+			$permission36 = "com.qihoo360.home.permission.WRITE_SETTINGS"
+			$permission37 = "android.permission.WRITE_EXTERNAL_STORAGE"
+			$permission38 = "com.android.launcher.permission.READ_SETTINGS"
+			$permission39 = "com.android.launcher2.permission.READ_SETTINGS"
+			$package = "com.newskin.tai"
 		condition:
-			filesize < 100000 and 
-			androguard.permission("android.permission.GET_INTENT_SENDER_INTENT") and 
-			androguard.permission("android.permission.PACKAGE_USAGE_STATS") and 
-			androguard.permission("android.permission.WRITE_MEDIA_STORAGE") and 
-			androguard.permission("android.permission.REQUEST_INSTALL_PACKAGES") and 
-			androguard.permission("android.permission.WRITE_EXTERNAL_STORAGE") and 
-			androguard.permission("android.permission.INTERACT_ACROSS_USERS_FULL") and 
-			androguard.permission("android.permission.CAPTURE_SECURE_VIDEO_OUTPUT") and 
-			androguard.permission("android.permission.SET_PROCESS_LIMIT") and 
-			androguard.permission("android.permission.CAPTURE_VIDEO_OUTPUT") and 
-			androguard.permission("android.permission.ACCESS_BACKGROUND_LOCATION") and 
-			androguard.permission("android.permission.RECORD_VIDEO") and 
-			androguard.permission("android.permission.READ_CALL_LOG") and 
-			androguard.permission("android.permission.CAPTURE_AUDIO_HOTWORD") and 
-			androguard.permission("android.permission.READ_EXTERNAL_STORAGE") and 
-			androguard.package_name("com1") and 
-			androguard.package_name("com2") and 
-			androguard.app_name("앱 이름")
-
+			all of ($permission*) and 
+			all of ($package*) and 
+			filesize < 6765 and 
+			(all of ($permission*) or $package)
 	}
