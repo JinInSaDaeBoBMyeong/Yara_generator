@@ -8,7 +8,6 @@ def yara_maker(apk_file, size_apk, file_hash):
     sample_name = file_hash
     app_name = apk_file.get_app_name()
     app_name = app_name.replace(" ", "")
-    apk_package = apk_file.get_package()
     permission = apk_file.get_permissions()
 
     rule= yara_tools.create_rule(name=app_name)
@@ -24,12 +23,8 @@ def yara_maker(apk_file, size_apk, file_hash):
     for ap in range(len(permission)):
         group_name = str('m') + str(ap)
         rule.add_strings(strings=permission[ap], identifier='permission')
-    
-    #Package
-    rule.add_strings(strings=apk_package, identifier='package')
 
     rule.add_condition(condition="filesize < {}".format(size_apk+10))
-    rule.add_condition(condition = "(all of ($permission*) or $package)")
 
     generated_rule = rule.build_rule(condition_groups=False)
 
