@@ -14,12 +14,6 @@ def file_size(apk_file):
     filesize = int(round(i/1024,2))
     return filesize
 #file hash(json 제목 MD5로 하기 위해)
-def file_hash(apk_file):
-    f = open(apk_file, 'r')
-    data = f.read()
-    hash = hashlib.md5(data).hexdigest()
-    return hash
-
 def file_load():
     if not os.path.isdir(sample_path):
         os.mkdir(sample_path)
@@ -38,9 +32,6 @@ def apk_analyze(apk_list):
     for al in range(len(apk_list)):
         #file path
         apk_path.append(sample_path + str('/') + apk_list[al])
-        #file_hash
-        # file_hash(apk_path[al])
-
         a = APK(apk_path[al])
         print("[+] 파일 분석 완료")
         json_yara_make(a, apk_list[al])
